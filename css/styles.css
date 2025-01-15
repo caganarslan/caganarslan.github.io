@@ -5,6 +5,8 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  font-size: 1rem; /* Base font size */
+  line-height: 1.5; /* Improved line height for readability */
 }
 nav {
   background-color: #232221;
@@ -28,26 +30,12 @@ nav ul li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  padding: 1.125em 1.25em; /* Reduced padding */
+  font-size: 1.25rem; /* Reduced font size */
+  max-height: none; /* Remove max-height */
 }
 nav ul li a:hover {
   background-color: #111;
-}
-@media screen and (max-width: 600px) {
-  nav ul {
-    display: block;
-    text-align: center;
-  }
-  nav ul li {
-    float: none;
-    display: block;
-    margin-right: 0;
-  }
-  nav ul li a {
-    padding: 72px; /* Doubled padding */
-    font-size: 5.2rem; /* Doubled font size */
-  }
 }
 
 /* Card styling for scientific publications */
@@ -135,4 +123,15 @@ nav ul li a:hover {
   }
 }
 
-/* Removed redundant styles */
+@media screen and (min-height: 100vw) {
+  nav ul li a {
+    padding: 1.5em 1.75em; /* Increased padding */
+    font-size: 1.5rem; /* Increased font size */
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    font-size: 1.125rem; /* Slightly larger font size on tablets and desktops */
+  }
+}
