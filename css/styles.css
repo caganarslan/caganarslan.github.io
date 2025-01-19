@@ -30,17 +30,32 @@ nav ul li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 1.125em 1.25em; /* Reduced padding */
+  padding: 0.75em 1em; /* Decreased padding */
   font-size: 1.25rem; /* Reduced font size */
   max-height: none; /* Remove max-height */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Make font bold */
+  background: linear-gradient(145deg, #2e2d2c, #1f1e1d); /* Darker gradient shade */
 }
+
 nav ul li a:hover {
   background-color: #111;
+  background: linear-gradient(145deg, #1f1e1d, #2e2d2c); /* Reverse darker gradient on hover */
+}
+
+p a {
+  color: #9b7d12;
+  text-decoration: none;
+}
+
+p a:hover {
+  color: #d7ab0b;
+  text-decoration: none;
 }
 
 /* Card styling for scientific publications */
 .card {
-  background-color: #444;
+  background-color: #342f2f; /* Darker background color */
   border-radius: 8px;
   padding: 20px;
   margin: 20px auto;
