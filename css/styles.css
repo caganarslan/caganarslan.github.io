@@ -31,7 +31,7 @@ nav ul li a {
   color: white;
   text-align: center;
   padding: 1em 1em; /* Decreased padding */
-  font-size: 3vh; 
+  font-size: vh; 
   max-height: none; /* Remove max-height */
   text-decoration: none; /* Remove underline */
   font-weight: bold; /* Make font bold */
@@ -44,7 +44,7 @@ nav ul li a:hover {
 }
 
 p {
-  font-size: 3vh;
+  font-size: 5vh;
   padding: 0em 1em; /* Decreased padding */
 }
 
