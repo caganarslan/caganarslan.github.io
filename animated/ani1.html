@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Müller 3D Rocking Text</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #181c25;
+    }
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+      perspective-origin: 50% 50%;
+    }
+    .rocking-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+    }
+    .rocking-text {
+      font-family: 'Arial Black', Arial, sans-serif;
+      font-size: 8vw;
+      color: #f5f6fa;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-shadow:
+        0 2px 8px rgba(0,0,0,0.35),
+        0 12px 24px rgba(0,0,0,0.12),
+        2px 2px 0 #7f8fa6,
+        4px 4px 0 #353b48;
+      transform-style: preserve-3d;
+      animation: rockY 2.5s infinite ease-in-out alternate;
+      /* This will give a 3D look as the text rocks */
+    }
+    /* Keyframes for rocking around the Y axis */
+    @keyframes rockY {
+      0% {
+        transform: rotateY(-45deg) scale(1.05);
+        text-shadow:
+            0 2px 24px rgba(0,0,0,0.25),
+            0 20px 40px rgba(0,0,0,0.25),
+            8px 2px 0 #7f8fa6,
+            16px 4px 0 #353b48;
+      }
+      50% {
+        transform: rotateY(45deg) scale(1.05);
+        text-shadow:
+            0 2px 24px rgba(0,0,0,0.25),
+            0 20px 40px rgba(0,0,0,0.25),
+            -8px 2px 0 #7f8fa6,
+            -16px 4px 0 #353b48;
+      }
+      100% {
+        transform: rotateY(-45deg) scale(1.05);
+        text-shadow:
+            0 2px 24px rgba(0,0,0,0.25),
+            0 20px 40px rgba(0,0,0,0.25),
+            8px 2px 0 #7f8fa6,
+            16px 4px 0 #353b48;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="rocking-container">
+    <span class="rocking-text">Müller</span>
+  </div>
+</body>
+</html>
