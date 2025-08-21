@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <title>Müller 3D Rocking Text</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Rustic hand-curvy font from Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     html, body {
       height: 100%;
@@ -22,6 +20,7 @@
       justify-content: center;
       perspective: 1200px;
       perspective-origin: 50% 50%;
+      position: relative;
     }
     .rocking-container {
       display: flex;
@@ -29,50 +28,88 @@
       justify-content: center;
       height: 100vh;
       width: 100vw;
+      position: relative;
     }
     .rocking-text {
-      font-family: 'Pacifico', cursive;
-      font-size: 9vw;
-      color: #fffbe7;
-      letter-spacing: 0.12em;
+      font-family: cursive, "Comic Sans MS", "Brush Script MT", sans-serif;
+      font-size: 10vw;
+      letter-spacing: 0.08em;
+      background: linear-gradient(90deg, #ffe259 0%, #ffa751 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      /* "Cube-like" 3D depth with uniform shadow layers */
       text-shadow:
-        0 6px 24px rgba(0,0,0,0.45),
-        0 2px 0 #b68c52,
-        0 4px 0 #4e3939;
+        1px 0 0 #ffde59,
+        2px 0 0 #ffd237,
+        3px 0 0 #ffbd1a,
+        4px 0 0 #e0a600,
+        5px 0 0 #b88d00,
+        6px 0 0 #7c5e00,
+        6px 2px 8px #000a;
       transform-style: preserve-3d;
-      /* Start with a -12deg x tilt */
       transform: rotateX(-12deg) rotateY(-45deg) scale(1.05);
       animation: rockY 2.5s infinite ease-in-out alternate;
+      user-select: none;
+      cursor: default;
     }
-    /* Keyframes for rocking around the Y axis, always tilted -12deg on X */
     @keyframes rockY {
       0% {
         transform: rotateX(-12deg) rotateY(-45deg) scale(1.05);
-        text-shadow:
-            0 6px 24px rgba(0,0,0,0.45),
-            12px 2px 0 #b68c52,
-            24px 4px 0 #4e3939;
       }
       50% {
         transform: rotateX(-12deg) rotateY(45deg) scale(1.05);
-        text-shadow:
-            0 6px 24px rgba(0,0,0,0.45),
-            -12px 2px 0 #b68c52,
-            -24px 4px 0 #4e3939;
       }
       100% {
         transform: rotateX(-12deg) rotateY(-45deg) scale(1.05);
-        text-shadow:
-            0 6px 24px rgba(0,0,0,0.45),
-            12px 2px 0 #b68c52,
-            24px 4px 0 #4e3939;
+      }
+    }
+    .fullscreen-btn {
+      position: absolute;
+      bottom: 3vw;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 1em 2.5em;
+      font-size: 1.1em;
+      font-family: inherit;
+      border: none;
+      border-radius: 2em;
+      background: linear-gradient(90deg, #ffe259 0%, #ffa751 100%);
+      color: #222;
+      box-shadow: 0 2px 10px #0006;
+      cursor: pointer;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+      z-index: 10;
+    }
+    .fullscreen-btn:active {
+      opacity: 0.7;
+    }
+    @media (max-width: 600px) {
+      .rocking-text {
+        font-size: 15vw;
+      }
+      .fullscreen-btn {
+        font-size: 1em;
+        padding: 1em 2em;
       }
     }
   </style>
 </head>
 <body>
-  <div class="rocking-container">
+  <div class="rocking-container" id="container">
     <span class="rocking-text">Müller</span>
+    <button class="fullscreen-btn" id="fs-btn">Fullscreen</button>
   </div>
+  <script>
+    // Fullscreen API for mobile and desktop
+    document.getElementById('fs-btn').addEventListener('click', function() {
+      const el = document.getElementById('container');
+      if (el.requestFullscreen) el.requestFullscreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.msRequestFullscreen) el.msRequestFullscreen();
+      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+    });
+  </script>
 </body>
 </html>
