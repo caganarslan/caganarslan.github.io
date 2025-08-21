@@ -30,28 +30,50 @@
       width: 100vw;
       position: relative;
     }
+    /* Responsive font: fill as much as possible, account for "g" and "ü" descenders/ascenders */
     .rocking-text {
-      font-family: cursive, "Comic Sans MS", "Brush Script MT", sans-serif;
-      font-size: 10vw;
-      letter-spacing: 0.08em;
+      font-family: "Dancing Script", "Brush Script MT", cursive, sans-serif;
+      font-size: 15vw;
+      max-width: 96vw;
+      max-height: 80vh;
+      display: inline-block;
+      line-height: 1;
+      letter-spacing: 0.02em;
       background: linear-gradient(90deg, #ffe259 0%, #ffa751 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      /* "Cube-like" 3D depth with uniform shadow layers */
+      /* "Cube-like" 3D depth with many shadow layers for double depth and shadowy effect */
       text-shadow:
-        1px 0 0 #ffde59,
-        2px 0 0 #ffd237,
-        3px 0 0 #ffbd1a,
-        4px 0 0 #e0a600,
-        5px 0 0 #b88d00,
-        6px 0 0 #7c5e00,
-        6px 2px 8px #000a;
+        2px 0 2px #6c5700,
+        4px 0 4px #6c5700,
+        6px 0 6px #4e3939,
+        8px 0 8px #2c2100,
+        10px 0 10px #000a,
+        12px 0 12px #000d,
+        14px 0 14px #000c,
+        16px 0 16px #000b,
+        18px 0 18px #0009,
+        20px 0 20px #0008,
+        22px 0 22px #0007,
+        24px 0 24px #0006,
+        26px 0 26px #0005,
+        28px 0 28px #0004,
+        30px 0 30px #0003,
+        32px 0 32px #0002,
+        34px 0 34px #0002,
+        36px 0 36px #0001,
+        38px 0 38px #0001,
+        40px 0 40px #0001;
       transform-style: preserve-3d;
       transform: rotateX(-12deg) rotateY(-45deg) scale(1.05);
       animation: rockY 2.5s infinite ease-in-out alternate;
       user-select: none;
       cursor: default;
+      filter: drop-shadow(0 8px 32px #000c);
+      /* For iOS Safari gradient text */
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
     }
     @keyframes rockY {
       0% {
@@ -64,52 +86,74 @@
         transform: rotateX(-12deg) rotateY(-45deg) scale(1.05);
       }
     }
+    /* Transparent fullscreen overlay button */
     .fullscreen-btn {
-      position: absolute;
-      bottom: 3vw;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 1em 2.5em;
-      font-size: 1.1em;
-      font-family: inherit;
+      position: fixed;
+      z-index: 100;
+      right: 0;
+      bottom: 0;
+      width: 32vw;
+      height: 32vw;
+      max-width: 120px;
+      max-height: 120px;
+      min-width: 60px;
+      min-height: 60px;
+      background: transparent;
       border: none;
-      border-radius: 2em;
-      background: linear-gradient(90deg, #ffe259 0%, #ffa751 100%);
-      color: #222;
-      box-shadow: 0 2px 10px #0006;
+      outline: none;
+      opacity: 0.01; /* invisible but clickable */
       cursor: pointer;
-      opacity: 0.9;
-      transition: opacity 0.2s;
-      z-index: 10;
+      touch-action: manipulation;
     }
-    .fullscreen-btn:active {
-      opacity: 0.7;
-    }
-    @media (max-width: 600px) {
+    /* Responsive font size for small screens */
+    @media (max-width: 600px), (max-height: 600px) {
       .rocking-text {
-        font-size: 15vw;
+        font-size: 22vw;
+        max-width: 98vw;
+        max-height: 80vh;
       }
       .fullscreen-btn {
-        font-size: 1em;
-        padding: 1em 2em;
+        max-width: 80px;
+        max-height: 80px;
+        min-width: 40px;
+        min-height: 40px;
       }
     }
   </style>
 </head>
 <body>
   <div class="rocking-container" id="container">
-    <span class="rocking-text">Müller</span>
-    <button class="fullscreen-btn" id="fs-btn">Fullscreen</button>
+    <span class="rocking-text" id="rockingText">Müller</span>
+    <button class="fullscreen-btn" id="fs-btn" aria-label="Fullscreen"></button>
   </div>
   <script>
     // Fullscreen API for mobile and desktop
-    document.getElementById('fs-btn').addEventListener('click', function() {
+    document.getElementById('fs-btn').addEventListener('click', function(e) {
       const el = document.getElementById('container');
       if (el.requestFullscreen) el.requestFullscreen();
       else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
       else if (el.msRequestFullscreen) el.msRequestFullscreen();
       else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+      // Prevent text selection on mobile tap
+      e.preventDefault();
     });
+
+    // Responsive font scaling: shrink font if needed to fit vertically
+    function resizeText() {
+      const text = document.getElementById('rockingText');
+      let fontSize = Math.min(window.innerWidth * 0.18, window.innerHeight * 0.8);
+      // Try to fit text vertically
+      text.style.fontSize = fontSize + 'px';
+      // If text overflows, reduce size
+      while (text.offsetHeight > window.innerHeight * 0.88) {
+        fontSize *= 0.98;
+        text.style.fontSize = fontSize + 'px';
+        if (fontSize < 10) break;
+      }
+    }
+    window.addEventListener('resize', resizeText);
+    window.addEventListener('orientationchange', resizeText);
+    document.addEventListener('DOMContentLoaded', resizeText);
   </script>
 </body>
 </html>
