@@ -73,10 +73,12 @@
       animation: rockY 2.5s infinite ease-in-out alternate;
       user-select: none;
       cursor: default;
-      filter: drop-shadow(0 8px 32px #000c);
       /* For iOS Safari gradient text */
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
+    }
+    .text-back{
+      transform : translateZ(-10px);
     }
     @keyframes rockY {
       0% {
@@ -127,6 +129,7 @@
 <body>
   <div class="rocking-container" id="container">
     <span class="rocking-text" id="rockingText">Müller</span>
+    <span class="rocking-text text-back" id="rockingText">Müller</span>
     <button class="fullscreen-btn" id="fs-btn" aria-label="Fullscreen"></button>
   </div>
   <script>
