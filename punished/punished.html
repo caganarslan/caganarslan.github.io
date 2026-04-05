@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Are Punished</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #1a1a1a;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  .content {
+    margin-top: 5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+
+  .accept {
+    background: #28a745;
+    color: #fff;
+  }
+
+  .accept:hover {
+    background: #218838;
+  }
+
+  .deny {
+    background: #dc3545;
+    color: #fff;
+  }
+
+  .deny:hover {
+    background: #c82333;
+  }
+
+  #punishmentText {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  footer {
+    margin-bottom: 1rem;
+  }
+
+  .ads-placeholder {
+    background: #333;
+    color: #aaa;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="content" id="mainContent">
+  <h1>You Are Punished!</h1>
+  <p>
+    You said something stupid on the internet and now you are punished.<br>
+    You can take your punishment like a big boy or ignore it and get back to whatever stupidery you were pursuing.
+  </p>
+
+  <div class="buttons">
+    <button class="accept" onclick="startPunishment()">Accept</button>
+    <button class="deny" onclick="denyPunishment()">Deny</button>
+  </div>
+
+  <div id="punishmentText"></div>
+</div>
+
+<footer>
+  <!-- Google Ads placeholder -->
+  <div class="ads-placeholder">
+    Google Ads Slot
+  </div>
+</footer>
+
+<script>
+function denyPunishment() {
+  window.history.back();
+}
+
+function startPunishment() {
+  const textDiv = document.getElementById("punishmentText");
+  let countdown = 10;
+
+  // Hide buttons and original text
+  const mainContent = document.getElementById("mainContent");
+  mainContent.querySelector("p").style.display = "none";
+  mainContent.querySelector(".buttons").style.display = "none";
+
+  textDiv.textContent = `You are punished for ${countdown} seconds`;
+
+  const interval = setInterval(() => {
+    countdown--;
+    if (countdown > 0) {
+      textDiv.textContent = `You are punished for ${countdown} seconds`;
+    } else {
+      clearInterval(interval);
+      textDiv.textContent = "Thank you for being so mature about this. You may leave.";
+    }
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
